@@ -37,22 +37,13 @@ jobs:
     needs: build  # 等待 build job 完成
     # 只在 main 分支推送时触发发布
     permissions:
-      contents: write    # 允许创建 Release 和修改仓库内容
+    contents: write    # 允许创建 Release 和修改仓库内容
     steps:
       - name: Download all artifacts
         uses: actions/download-artifact@v8
         with:
           path: ./artifacts  # 下载到 artifacts 目录
-      
-      - name: Create Release
+      - name: releases 
         uses: softprops/action-gh-release@v2
-        with:
-          name: "Release ${{ github.sha }}"
-          tag_name: "v${{ github.run_number }}"  # 自动生成版本号
-          files: |
-            ./artifacts/windows/**/*
-            ./artifacts/linux/**/*
-          draft: false
-          prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+      
