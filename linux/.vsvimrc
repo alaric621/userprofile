@@ -1,0 +1,12 @@
+inoremap jj <ESC>
+vnoremap y y`]
+
+
+" 普通模式：按 Ctrl+a 全选
+nnoremap <C-a> ggVG
+
+" 插入模式：按 Ctrl+a 全选（并进入可视模式）
+inoremap <C-a> <Esc>ggVG
+
+" 可视模式：防止重复触发
+vnoremap <C-a> ggVG
