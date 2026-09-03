@@ -25,3 +25,10 @@ jobs:
           path: windows/
           archive: true
           include-hidden-files: true
+      - name: Upload linux artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: linux
+          path: linux/
+          archive: true
+          include-hidden-files: true
