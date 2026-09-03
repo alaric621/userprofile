@@ -2,6 +2,7 @@ name: Build and Archive
 
 on:
   push:
+    
     tags:
       - 'v*'           # 只有打 tag 时才触发完整发布
   workflow_dispatch:    # 支持手动触发
@@ -12,40 +13,10 @@ jobs:
     
     steps:
       - uses: actions/checkout@v4
-
-      # 压缩 windows 目录（如果存在）
-      - name: Compress windows
-        run: |
-          if [ -d "./windows" ]; then
-            zip -r windows.zip ./windows/
-            echo "WINDOWS_EXISTS=true" >> $GITHUB_ENV
-          else
-            echo "windows directory not found, skipping..."
-            echo "WINDOWS_EXISTS=false" >> $GITHUB_ENV
-          fi
-
-      # 压缩 linux 目录（如果存在）
-      - name: Compress linux
-        run: |
-          if [ -d "./linux" ]; then
-            zip -r linux.zip ./linux/
-            echo "LINUX_EXISTS=true" >> $GITHUB_ENV
-          else
-            echo "linux directory not found, skipping..."
-            echo "LINUX_EXISTS=false" >> $GITHUB_ENV
-          fi
-
       # 上传到 Artifacts（工作流产物）
       - name: Upload windows artifact
-        if: env.WINDOWS_EXISTS == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: windows
-          path: windows.zip
-
-      - name: Upload linux artifact
-        if: env.LINUX_EXISTS == 'true'
-        uses: actions/upload-artifact@v4
-        with:
-          name: linux
-          path: linux.zip
+          path: windows
+          archive: true
