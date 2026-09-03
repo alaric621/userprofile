@@ -24,3 +24,4 @@ jobs:
           name: windows
           path: windows/
           archive: true
+          include-hidden-files: true
