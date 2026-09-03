@@ -12,7 +12,11 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - uses: actions/checkout@v4
+       
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: show dir 
+        run: ls -al 
       # 上传到 Artifacts（工作流产物）
       - name: Upload windows artifact
         uses: actions/upload-artifact@v7
