@@ -14,7 +14,7 @@ jobs:
       - uses: actions/checkout@v4
       # 上传到 Artifacts（工作流产物）
       - name: Upload windows artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: windows
           path: windows
