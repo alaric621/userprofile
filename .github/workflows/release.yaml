@@ -25,3 +25,13 @@ jobs:
         with:
           name: linux
           path: linux.zip
+      # 在 workflow 文件末尾添加这个步骤
+      - name: Upload to Release
+        if: startsWith(github.ref, 'refs/tags/')  # 只有 tag 触发才执行
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            linux.zip
+            windows.zip
+          generate_release_notes: true  # 自动生成 Release 说明
+          fail_on_unmatched_files: false  # 如果某个文件不存在也不报错
