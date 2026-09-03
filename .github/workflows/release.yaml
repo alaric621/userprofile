@@ -49,14 +49,3 @@ jobs:
         with:
           name: linux
           path: linux.zip
-
-      # 上传到 Release（只在 tag 触发时执行）
-      - name: Upload to Release
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: softprops/action-gh-release@v1
-        with:
-          files: |
-            windows.zip
-            linux.zip
-          generate_release_notes: true
-          fail_on_unmatched_files: false   # 如果某个文件不存在也不报错
